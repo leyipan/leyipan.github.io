@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>paipai - AI Companion Robots</title>
+    <style>
+        :root {
+            --primary: #e18191; /* Rose pink */
+            --primary-light: #f5c3cb;
+            --primary-dark: #b35f6d;
+            --accent: #583d72; /* Complementary purple */
+            --text: #333333;
+            --light: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            background-color: var(--primary);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--light);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background-color: var(--primary-light);
+            padding-top: 80px; /* Account for fixed header */
+        }
+
+        .hero-content {
+            width: 50%;
+            padding-right: 2rem;
+        }
+
+        .hero-image {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-dark);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .products {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .product-card {
+            width: 32%;
+            margin-bottom: 2rem;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-image {
+            height: 200px;
+            background-color: var(--primary-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .product-details {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-dark);
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 3rem 0;
+        }
+
+        .feature {
+            width: 30%;
+            margin: 1rem;
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            background-color: var(--light);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-dark);
+        }
+
+        .team {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .team-member {
+            width: 23%;
+            margin: 1rem;
+            text-align: center;
+        }
+
+        .team-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 1rem;
+            border: 5px solid var(--primary-light);
+        }
+
+        .team-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+            color: var(--primary-dark);
+        }
+
+        .team-role {
+            font-size: 0.9rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--light);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .social-links li {
+            margin: 0 1rem;
+        }
+
+        .social-links a {
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--primary-light);
+        }
+
+        /* Product detail page styles */
+        .product-detail {
+            padding-top: 100px; /* Account for fixed header */
+        }
+
+        .product-hero {
+            display: flex;
+            margin-bottom: 3rem;
+        }
+
+        .product-hero-image {
+            width: 50%;
+            padding-right: 2rem;
+        }
+
+        .product-hero-image img {
+            max-width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-hero-content {
+            width: 50%;
+        }
+
+        .specs-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .specs-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .specs-list li:before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Team page styles */
+        .team-page {
+            padding-top: 100px; /* Account for fixed header */
+        }
+
+        .team-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .hero-content, .hero-image,
+            .product-hero-image, .product-hero-content {
+                width: 100%;
+                padding-right: 0;
+            }
+
+            .hero, .product-hero {
+                flex-direction: column;
+            }
+
+            .hero-image, .product-hero-image {
+                margin-top: 2rem;
+            }
+
+            .product-card {
+                width: 48%;
+            }
+
+            .feature {
+                width: 45%;
+            }
+
+            .team-member {
+                width: 45%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .product-card, .feature, .team-member {
+                width: 100%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Home Page -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Pai<span>pai</span></a>
+                <ul class="nav-links">
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="pai.html">Pai-pai</a></li>
+                    <li><a href="an.html">An-an</a></li>
+                    <li><a href="tie.html">Tie-tie</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>AI Companion Robots</h1>
+                <h2>Technology with a Heart</h2>
+                <p>Experience the perfect blend of cutting-edge AI technology and human-like warmth with our revolutionary companion robots. Designed to bring comfort, assistance, and friendship to your everyday life.</p>
+                <a href="#products" class="btn">Explore Our Robots</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our AI Companions</h2>
+                <p>Discover the perfect AI companion tailored to your needs</p>
+            </div>
+            <div class="products">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="./pai.png" alt="Pai-pai">
+                    </div>
+                    <div class="product-details">
+                        <h3 class="product-title">Pai-pai</h3>
+                        <p>Your perfect everyday companion, designed to provide emotional support and genuine connection.</p>
+                        <a href="pai.html" class="btn">Learn More</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="./an.jpg" alt="Caregiver Robot">
+                    </div>
+                    <div class="product-details">
+                        <h3 class="product-title">An-an</h3>
+                        <p>Specializing in care and wellness, our Caregiver robot offers attentive assistance for those who need it most.</p>
+                        <a href="an.html" class="btn">Learn More</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="./tie.png" alt="Tie-tie">
+                    </div>
+                    <div class="product-details">
+                        <h3 class="product-title">Tie-tie</h3>
+                        <p>A personalized companion friend that socializes with you, and tailored to your own needs.</p>
+                        <a href="tie.html" class="btn">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background-color: var(--primary-light);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Technology with Warmth</h2>
+                <p>What makes our AI companions truly unique</p>
+            </div>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="feature-title">Advanced AI</h3>
+                    <p>Our robots use state-of-the-art artificial intelligence to understand emotions and provide personalized interaction.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="feature-title">Emotional Connection</h3>
+                    <p>Designed to create genuine emotional bonds and provide companionship that feels real and meaningful.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Privacy First</h3>
+                    <p>Your data and conversations stay private, with robust security measures to protect your information.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="feature-title">Adaptive Learning</h3>
+                    <p>Our companions evolve and adapt to your preferences, becoming more attuned to your needs over time.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="feature-title">Customizable</h3>
+                    <p>Personalize your companion's personality, voice, and interaction style to create your ideal AI partner.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3 class="feature-title">Practical Assistance</h3>
+                    <p>Beyond emotional support, our robots help with everyday tasks, information, and organization.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <a href="#" class="logo">Pai<span>pai</span></a>
+            <p>Bringing warmth to technology, one companion at a time.</p>
+            <ul class="social-links">
+                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+            </ul>
+            <p>&copy; 2025 Paipai. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Product Pages and Team Page would be separate HTML files -->
+</body>
+</html>

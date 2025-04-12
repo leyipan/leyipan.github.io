@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>An-An - Paipai</title>
+    <style>
+        :root {
+            --primary: #e18191; /* Rose pink */
+            --primary-light: #f5c3cb;
+            --primary-dark: #b35f6d;
+            --accent: #583d72; /* Complementary purple */
+            --text: #333333;
+            --light: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            background-color: var(--primary);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--light);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .active {
+            background-color: var(--primary-dark);
+        }
+
+        .product-detail {
+            padding-top: 100px; /* Account for fixed header */
+        }
+
+        .product-hero {
+            display: flex;
+            margin-bottom: 3rem;
+        }
+
+        .product-hero-image {
+            width: 50%;
+            padding-right: 2rem;
+        }
+
+        .product-hero-image img {
+            max-width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-hero-content {
+            width: 50%;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-dark);
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .specs-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .specs-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .specs-list li:before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 3rem 0;
+        }
+
+        .feature {
+            width: 30%;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-radius: 15px;
+            background-color: var(--light);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-dark);
+        }
+
+        .use-cases {
+            background-color: var(--primary-light);
+            padding: 5rem 0;
+        }
+
+        .use-case {
+            background-color: var(--light);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+        }
+
+        .use-case-image {
+            width: 30%;
+            margin-right: 2rem;
+        }
+
+        .use-case-image img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .use-case-content {
+            width: 70%;
+        }
+
+        .use-case-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        .specs-table th, .specs-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .specs-table th {
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+            font-weight: bold;
+        }
+
+        .cta {
+            text-align: center;
+            padding: 5rem 0;
+            background-color: var(--primary-light);
+        }
+
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--light);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .social-links li {
+            margin: 0 1rem;
+        }
+
+        .social-links a {
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--primary-light);
+        }
+
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .product-hero-image, .product-hero-content,
+            .use-case-image, .use-case-content {
+                width: 100%;
+                padding-right: 0;
+            }
+
+            .product-hero, .use-case {
+                flex-direction: column;
+            }
+
+            .product-hero-image, .use-case-image {
+                margin-bottom: 2rem;
+            }
+
+            .feature {
+                width: 45%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .feature {
+                width: 100%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="main.html" class="logo">Pai<span>pai</span></a>
+                <ul class="nav-links">
+                    <li><a href="main.html">Home</a></li>
+                    <li><a href="pai.html">Pai-pai</a></li>
+                    <li><a href="an.html" class="active">An-An</a></li>
+                    <li><a href="tie.html">Tie-Tie</a></li>
+ 
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="product-detail">
+        <div class="container">
+            <div class="product-hero">
+                <div class="product-hero-image">
+                    <img src="./an.jpg" alt="An-An Caregiver Robot">
+                </div>
+                <div class="product-hero-content">
+                    <h1>An-An</h1>
+                    <p>Your dedicated AI caregiver, designed to provide attentive assistance and health monitoring with a compassionate touch. An-An brings peace of mind to those who need additional support in their daily lives.</p>
+                    <ul class="specs-list">
+                        <li>Advanced health monitoring sensors</li>
+                        <li>Medication reminders and tracking</li>
+                        <li>Emergency response system</li>
+                        <li>Fall detection and prevention</li>
+                        <li>Nutritional guidance and meal planning</li>
+                        <li>10+ hours of battery life</li>
+                        <li>Easy-to-use touch interface</li>
+                    </ul>
+                    <div class="price">
+                        <span style="font-size: 1.8rem; font-weight: bold; color: var(--primary-dark);">$60</span>
+                        <span style="font-size: 1.1rem; color: var(--text); margin-left: 0.5rem;">Free shipping</span>
+                    </div>
+                    <a href="#" class="btn" style="margin-top: 1rem;">Pre-Order Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="section-title">
+                <h2>Features & Benefits</h2>
+                <p>Discover how An-An provides compassionate care and support</p>
+            </div>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3 class="feature-title">Health Monitoring</h3>
+                    <p>Tracks vital signs and health metrics, providing regular reports and alerting to any concerning changes.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <h3 class="feature-title">Medication Management</h3>
+                    <p>Provides timely medication reminders and tracks adherence to ensure proper health maintenance.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Emergency Assistance</h3>
+                    <p>One-touch emergency contact system connects to designated caregivers or emergency services when needed.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3 class="feature-title">Nutrition Support</h3>
+                    <p>Offers dietary recommendations, meal planning, and hydration reminders tailored to individual health needs.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-walking"></i>
+                    </div>
+                    <h3 class="feature-title">Activity Encouragement</h3>
+                    <p>Suggests appropriate physical activities and exercises while monitoring exertion levels for safety.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="feature-title">Cognitive Engagement</h3>
+                    <p>Provides brain-stimulating activities, conversations, and memory exercises to maintain cognitive health.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="use-cases">
+        <div class="container">
+            <div class="section-title">
+                <h2>How An-An Helps</h2>
+                <p>Real-world applications of An-An's caregiving capabilities</p>
+            </div>
+            
+            <div class="use-case">
+                <div class="use-case-image">
+                    <img src="./an.alarm.png" alt="Elderly Care">
+                </div>
+                <div class="use-case-content">
+                    <h3 class="use-case-title">Senior Care Companion</h3>
+                    <p>An-An provides seniors with a reliable companion that monitors health, reminds about medications, and offers cognitive stimulation through engaging conversations and activities.</p>
+                    <p>The emergency response feature gives both seniors and their families peace of mind, knowing help is just one button away if needed.</p>
+                </div>
+            </div>
+            
+            <div class="use-case">
+                <div class="use-case-image">
+                    <img src="./an.tech.jpg" alt="Recovery Support">
+                </div>
+                <div class="use-case-content">
+                    <h3 class="use-case-title">Recovery Support</h3>
+                    <p>An-An provides seniors with a reliable companion that monitors health, reminds about medications, and offers cognitive stimulation through engaging conversations and activities.</p>
+                    <p>The emergency response feature gives both seniors and their families peace of mind, knowing help is just one button away if needed.</p>
+                </div>
+            </div>
+
+            <footer>
+                <div class="container">
+                    <a href="main.html" class="logo">Pai<span>Pai</span></a>
+                    <p>Bringing warmth to technology, one companion at a time.</p>
+                    <ul class="social-links">
+                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                    </ul>
+                    <p>&copy; 2025 Paipaimth. All rights reserved.</p>
+                </div>
+            </footer>
+        </body>
+        </html>
+    
